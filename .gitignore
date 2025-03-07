@@ -1,0 +1,9 @@
+## Archivos de Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vs
+## Archivos de salida
+bin/
+obj/
