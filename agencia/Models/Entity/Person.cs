@@ -2,7 +2,7 @@
 
 namespace agencia.Models.Entity
 {
-    public class Person
+    public abstract class Person
     {
         [Key]
         public long Id { get; set; }
@@ -15,5 +15,7 @@ namespace agencia.Models.Entity
         public String email { get; set; }
         public String telephone { get; set; }
         public String adress { get; set; }
+        public String nacionality { get; set; }
+        public DateOnly birthDate { get; set; }
     }
 }
