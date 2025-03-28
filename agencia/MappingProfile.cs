@@ -9,8 +9,12 @@ namespace agencia
         //Profiles
         public MappingProfile()
         {
-            CreateMap<PersonDTO, Person>();
-            CreateMap<Person, PersonDTO>();
+            CreateMap<ClientDTO, Client>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Client, ClientDTO>();
+            CreateMap<EmployeeDTO, Employee>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<Employee, EmployeeDTO>();
         }
     }
 }
