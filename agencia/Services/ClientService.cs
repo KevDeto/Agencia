@@ -28,10 +28,8 @@ namespace agencia.Services
             try
             {
                 var clientEntity = _mapper.Map<Client>(clientDTO);
-                _context.Clients.Add(clientEntity);
-                await _context.SaveChangesAsync();
-                var clientResponse = _mapper.Map<ClientDTO>(clientEntity);
-                return clientResponse;
+                var clientCreated = await _clientRepository.InsertAsync(clientEntity);
+                return _mapper.Map<ClientDTO>(clientEntity);
             }
             catch (DbUpdateException ex)
             {

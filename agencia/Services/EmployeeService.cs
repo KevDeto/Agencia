@@ -29,10 +29,8 @@ namespace agencia.Services
             try
             {
                 var employeeEntity = _mapper.Map<Employee>(employeeDTO);
-                _context.Employees.Add(employeeEntity);
-                await _context.SaveChangesAsync();
-                var clientResponse = _mapper.Map<EmployeeDTO>(employeeEntity);
-                return clientResponse;
+                var employeeCreated = await _employeeRepository.InsertAsync(employeeEntity);
+                return _mapper.Map<EmployeeDTO>(employeeEntity);
             }
             catch (DbUpdateException ex)
             {
@@ -52,7 +50,7 @@ namespace agencia.Services
                 var employeeEntity = await _employeeRepository.GetByIdAsync(Id);
                 return _mapper.Map<EmployeeDTO>(employeeEntity);
             }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not KeyNotFoundException)
             {
                 throw new ApplicationException("An unexpected error occurred while getting the client.", ex);
             }
@@ -70,7 +68,7 @@ namespace agencia.Services
                 _mapper.Map(employeeDTO, employeeEntity);
                 await _employeeRepository.UpdateAsync(employeeEntity);
             }
-            catch (KeyNotFoundException ex)
+            catch (Exception ex) when (ex is not KeyNotFoundException)
             {
                 throw new ApplicationException("An unexpected error occurred while updating the client.", ex);
             }
@@ -82,11 +80,7 @@ namespace agencia.Services
             {
                 await _employeeRepository.DeleteAsync(Id);
             }
-            catch (KeyNotFoundException ex)
-            {
-                throw new KeyNotFoundException($"Client with Id {Id} not found.", ex);
-            }
-            catch (Exception ex)
+            catch (Exception ex) when (ex is not KeyNotFoundException)
             {
                 throw new ApplicationException("An unexpected error occurred while updating the client.", ex);
             }
