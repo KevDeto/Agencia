@@ -43,6 +43,12 @@ void ConfigureRepositories(WebApplicationBuilder builder)
     builder.Services.AddScoped<IClientService, ClientService>();
     builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
     builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+    builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+    builder.Services.AddScoped<IServiceService, ServiceService>();
+    builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+    builder.Services.AddScoped<IPackageService, PackageService>();
+    builder.Services.AddScoped<ISaleRepository, SaleRepository>();
+    builder.Services.AddScoped<ISaleService, SaleService>();
 }
 
 void ConfigureSwagger(WebApplicationBuilder builder)
