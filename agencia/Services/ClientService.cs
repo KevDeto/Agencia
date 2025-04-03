@@ -12,13 +12,11 @@ namespace agencia.Services
     {
         public readonly IClientRepository _clientRepository;
         public readonly IMapper _mapper;
-        public readonly AppDbContext _context;
 
         public ClientService(IClientRepository clientRepository, IMapper mapper, AppDbContext context)
         {
             _clientRepository = clientRepository;
             _mapper = mapper;
-            _context = context;
         }
 
         public async Task<ClientDTO> CreateAsync(ClientDTO clientDTO)

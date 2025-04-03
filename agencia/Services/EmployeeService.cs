@@ -13,13 +13,11 @@ namespace agencia.Services
     {
         public readonly IEmployeeRepository _employeeRepository;
         public readonly IMapper _mapper;
-        public readonly AppDbContext _context;
 
-        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper, AppDbContext context)
+        public EmployeeService(IEmployeeRepository employeeRepository, IMapper mapper)
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
-            _context = context;
         }
 
         public async Task<EmployeeDTO> CreateAsync(EmployeeDTO employeeDTO)
@@ -43,7 +41,6 @@ namespace agencia.Services
             }
             catch (Exception ex)
             {
-                // Captura cualquier otra excepción inesperada
                 throw new ApplicationException("An unexpected error occurred while creating the client.", ex);
             }
         }
@@ -74,10 +71,6 @@ namespace agencia.Services
                 await _employeeRepository.UpdateAsync(employeeEntity);
             }
             catch (KeyNotFoundException ex)
-            {
-                throw new KeyNotFoundException($"Client with Id {employeeDTO.Id} not found.", ex);
-            }
-            catch (Exception ex)
             {
                 throw new ApplicationException("An unexpected error occurred while updating the client.", ex);
             }
