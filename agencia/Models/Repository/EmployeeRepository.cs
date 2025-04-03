@@ -17,7 +17,7 @@ namespace agencia.Models.Repository
         public async Task DeleteAsync(long Id)
         {
             var employee = await _context.Employees.FindAsync(Id)
-                ?? throw new KeyNotFoundException($"Client with Id {Id} not found.");
+                ?? throw new KeyNotFoundException($"Employee with Id {Id} not found.");
             _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
         }
@@ -30,7 +30,7 @@ namespace agencia.Models.Repository
         public async Task<Employee> GetByIdAsync(long Id)
         {
             return await _context.Employees.FindAsync(Id)
-                ?? throw new KeyNotFoundException($"Client with Id {Id} not found.");
+                ?? throw new KeyNotFoundException($"Employee with Id {Id} not found.");
         }
 
         public async Task<Employee> InsertAsync(Employee employee)
