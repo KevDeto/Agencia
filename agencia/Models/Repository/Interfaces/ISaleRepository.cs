@@ -9,5 +9,7 @@ namespace agencia.Models.Repository.Interfaces
         Task UpdateAsync(Sale sale);
         Task DeleteAsync(long Id);
         Task<IEnumerable<Sale>> GetAllAsync();
+        Task<Service> GetServiceByIdAsync(long? Id);
+        Task<Package> GetPackageByIdAsync(long? Id);
     }
 }
