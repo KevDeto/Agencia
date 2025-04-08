@@ -115,8 +115,8 @@ namespace agencia.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     price = table.Column<double>(type: "float", nullable: false),
-                    serviceId = table.Column<long>(type: "bigint", nullable: false),
-                    packageId = table.Column<long>(type: "bigint", nullable: false)
+                    serviceId = table.Column<long>(type: "bigint", nullable: true),
+                    packageId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {

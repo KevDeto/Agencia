@@ -12,7 +12,7 @@ using agencia.Context;
 namespace agencia.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250331154907_Initial")]
+    [Migration("20250408193853_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -162,13 +162,13 @@ namespace agencia.Migrations
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("packageId")
+                    b.Property<long?>("packageId")
                         .HasColumnType("bigint");
 
                     b.Property<double>("price")
                         .HasColumnType("float");
 
-                    b.Property<long>("serviceId")
+                    b.Property<long?>("serviceId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -231,14 +231,12 @@ namespace agencia.Migrations
                     b.HasOne("agencia.Models.Entity.Package", "package")
                         .WithMany("sales")
                         .HasForeignKey("packageId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("agencia.Models.Entity.Service", "service")
                         .WithMany("sales")
                         .HasForeignKey("serviceId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("package");
 
