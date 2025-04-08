@@ -24,6 +24,15 @@ namespace agencia
             CreateMap<ServiceDTO, Service>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<Service, ServiceDTO>();
+            CreateMap<SaleDTO, Sale>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.service, opt => opt.Ignore()) // Manejamos esto manualmente
+                .ForMember(dest => dest.package, opt => opt.Ignore()); // Manejamos esto manualmente
+            CreateMap<Sale, SaleDTO>()
+                .ForMember(dest => dest.serviceId,
+                           opt => opt.MapFrom(src => src.service.Id))
+                .ForMember(dest => dest.packageId,
+                           opt => opt.MapFrom(src => src.package.Id));
         }
     }
 }
